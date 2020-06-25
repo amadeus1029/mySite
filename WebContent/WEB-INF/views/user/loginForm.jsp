@@ -22,7 +22,7 @@
             <ul>
                 <li><%=authUser.getName()%> 님(<%=authUser.getNo()%>) 안녕하세요^^</li>
                 <li><a href="/mySite/user?action=logout">로그아웃</a></li>
-                <li><a href="">회원정보수정</a></li>
+                <li><a href="/mySite/user?action=modifyForm">회원정보수정</a></li>
             </ul>
             <%} else {%>
             <ul>

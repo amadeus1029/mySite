@@ -21,12 +21,11 @@
 
         <div id="header">
             <h1><a href="/mySite/main">MySite</a></h1>
-
             <%if(authUser != null){%>
             <ul>
                 <li><%=authUser.getName()%> 님(<%=authUser.getNo()%>) 안녕하세요^^</li>
                 <li><a href="/mySite/user?action=logout">로그아웃</a></li>
-                <li><a href="">회원정보수정</a></li>
+                <li><a href="/mySite/user?action=modifyForm">회원정보수정</a></li>
             </ul>
             <%} else {%>
             <ul>
