@@ -1,8 +1,4 @@
-<%@ page import="com.javaex.vo.UserVo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    UserVo authUser = (UserVo)session.getAttribute("authUser");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,42 +11,13 @@
 
 <body>
     <div id="wrap">
-        <div id="header">
-            <h1><a href="/mySite/main">MySite</a></h1>
-            <%if(authUser != null){%>
-            <ul>
-                <li><%=authUser.getName()%> 님(<%=authUser.getNo()%>) 안녕하세요^^</li>
-                <li><a href="/mySite/user?action=logout">로그아웃</a></li>
-                <li><a href="/mySite/user?action=modifyForm">회원정보수정</a></li>
-            </ul>
-            <%} else {%>
-            <ul>
-                <li><a href="/mySite/user?action=loginForm">로그인</a></li>
-                <li><a href="/mySite/user?action=joinForm">회원가입</a></li>
-            </ul>
-            <%}%>
-        </div>
+        <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
         <!-- //header -->
 
-        <div id="nav">
-            <ul>
-                <li><a href="">방명록</a></li>
-                <li><a href="">갤러리</a></li>
-                <li><a href="">게시판</a></li>
-                <li><a href="">입사지원서</a></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+        <jsp:include page="/WEB-INF/views/include/nav.jsp"></jsp:include>
         <!-- //nav -->
 
-        <div id="aside">
-            <h2>회원</h2>
-            <ul>
-                <li>회원정보</li>
-                <li>로그인</li>
-                <li>회원가입</li>
-            </ul>
-        </div>
+        <jsp:include page="/WEB-INF/views/include/asideuser.jsp"></jsp:include>
         <!-- //aside -->
 
         <div id="content">
@@ -70,7 +37,7 @@
 
             <div id="user">
                 <div id="joinForm">
-                    <form action="/mySite/user" method="get">
+                    <form action="/mySite/user" method="post">
                         <input type="hidden" name="action" value="join">
                         <!-- 아이디 -->
                         <div class="form-group">
@@ -125,9 +92,7 @@
         <!-- //content  -->
         <div class="clear"></div>
 
-        <div id="footer">
-            Copyright ⓒ 2020 황일영. All right reserved
-        </div>
+        <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
         <!-- //footer -->
 
     </div>
