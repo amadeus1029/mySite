@@ -76,7 +76,6 @@
                 <div id="modifyForm">
                     <form action="/mySite/user" method="get">
                         <input type="hidden" name="action" value="modify">
-                        <input type="hidden" name="id" value="<%=userId%>">
                         <!-- 아이디 -->
                         <div class="form-group">
                             <label class="form-text" for="input-uid">아이디</label>

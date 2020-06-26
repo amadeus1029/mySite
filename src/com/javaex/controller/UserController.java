@@ -66,17 +66,29 @@ public class UserController extends HttpServlet {
         } else if("modifyForm".equals(action)) {
             WebUtil.forward(request,response,"WEB-INF/views/user/modifyForm.jsp");
         } else if("modify".equals(action)) {
-            String id = request.getParameter("id");
+
+            //아래 코드는 보안이 이루어지지 않는 코드이므로 적절하지 않다고 판단됨
+            /*String id = request.getParameter("id");
             String password = request.getParameter("password");
             String name = request.getParameter("name");
             String gender = request.getParameter("gender");
 
             UserDao userDao = new UserDao();
-            userDao.userModify(id,password,name,gender);
+            userDao.userModify(id,password,name,gender);*/
+
+            HttpSession session = request.getSession();
+            UserVo userVo = (UserVo) session.getAttribute("authUser");
+            UserDao userDao = new UserDao();
+            int no = userVo.getNo();
+            String id = (userDao.getUser(no)).getId();
+            String password = request.getParameter("password");
+            String name = request.getParameter("name");
+            String gender = request.getParameter("gender");
+
+            userDao.userModify(no,password,name,gender);
 
             UserVo authVo = userDao.getUser(id,password);
 
-            HttpSession session = request.getSession();
             session.setAttribute("authUser", authVo);
 
             WebUtil.redirect(request,response,"/mySite/main");

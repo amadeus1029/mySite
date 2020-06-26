@@ -112,7 +112,7 @@ public class UserDao {
 
         try {
             String query = "";
-            query += " SELECT id ";
+            query += " SELECT id, password ";
             query += " FROM users ";
             query += " WHERE no = ?";
 
@@ -124,8 +124,10 @@ public class UserDao {
 
             while (rs.next()) {
                 String id = rs.getString("id");
+                String password = rs.getString("password");
                 userVo = new UserVo();
                 userVo.setId(id);
+                userVo.setPassword(password);
             }
 
         } catch (SQLException e) {
@@ -140,7 +142,7 @@ public class UserDao {
     }
 
     //수정폼 전송
-    public int userModify(String id, String password, String name, String gender) {
+    public int userModify(int no, String password, String name, String gender) {
         int count = 0;
 
         getConnection();
@@ -153,14 +155,14 @@ public class UserDao {
             query += " set password = ? , ";
             query += "     name = ? , ";
             query += "     gender = ? ";
-            query += " where id = ? ";
+            query += " where no = ? ";
 
             pstmt = conn.prepareStatement(query); // 쿼리로 만들기
 
             pstmt.setString(1, password); // ?(물음표) 중 1번째, 순서중요
             pstmt.setString(2, name); // ?(물음표) 중 2번째, 순서중요
             pstmt.setString(3, gender); // ?(물음표) 중 3번째, 순서중요
-            pstmt.setString(4, id); // ?(물음표) 중 4번째, 순서중요
+            pstmt.setInt(4, no); // ?(물음표) 중 4번째, 순서중요
 
             count = pstmt.executeUpdate(); // 쿼리문 실행
 
